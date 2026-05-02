@@ -1,20 +1,24 @@
 # Stage 1 — build TypeScript
 FROM node:20-slim AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+
+RUN npm install -g pnpm
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
+
 COPY tsconfig.json ./
 COPY src ./src
-RUN npm run build
+RUN pnpm run build
 
 # Stage 2 — production runtime with Playwright/Chromium
 FROM node:20-slim AS runner
 WORKDIR /app
 
-RUN npm install -g npm@latest
+RUN npm install -g pnpm
 
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --prod
 
 # Install Chromium and all required system dependencies
 RUN npx playwright install --with-deps chromium
