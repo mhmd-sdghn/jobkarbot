@@ -1,7 +1,7 @@
 import { sendMessage, approvalKeyboard, answerCallbackQuery, editMessageReplyMarkup, MAIN_MENU } from "./client.js";
 import {
   isAdmin, isAuthorized, isPending,
-  addPending, approveUser, revokeUser,
+  addPending, approveUser, revokeUser, removePending, getPendingUser,
   getAdminChatId,
 } from "./users.js";
 import type { BaleMessage, BaleCallbackQuery } from "../types.js";
@@ -132,7 +132,8 @@ export async function handleCallbackQuery(cb: BaleCallbackQuery) {
   if (!action || !targetChatId) return;
 
   if (action === "approve") {
-    approveUser(targetChatId, targetChatId);
+    const pending = getPendingUser(targetChatId);
+    approveUser(targetChatId, pending?.firstName ?? targetChatId);
     await sendMessage(targetChatId, "✅ درخواست شما تأیید شد! به ربات خوش آمدید.", MAIN_MENU);
     await answerCallbackQuery(cb.id, "کاربر تأیید شد");
     if (cb.message) {
@@ -140,6 +141,7 @@ export async function handleCallbackQuery(cb: BaleCallbackQuery) {
       await sendMessage(adminChatId, `✅ کاربر \`${targetChatId}\` تأیید شد.`);
     }
   } else if (action === "reject") {
+    removePending(targetChatId);
     revokeUser(targetChatId);
     await sendMessage(targetChatId, "❌ متأسفانه درخواست شما رد شد.");
     await answerCallbackQuery(cb.id, "کاربر رد شد");
