@@ -11,7 +11,10 @@ services:
     volumes:
       - ./settings.json:/app/settings.json
       - jobkar_data:/app/data
+      - jobkar_storage:/app/storage
 
 volumes:
   jobkar_data:
+    driver: local
+  jobkar_storage:
     driver: local
