@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
 import { resolve } from "path";
 import { loadConfig } from "../config.js";
+import { clearSeenForUser } from "../deduplicator.js";
 import type { BotUser } from "../types.js";
 
 const DATA_DIR = resolve(process.cwd(), "data");
@@ -51,6 +52,7 @@ export function approveUser(chatId: string, firstName: string) {
 
 export function revokeUser(chatId: string) {
   writeFile(APPROVED_FILE, readApproved().filter((u) => u.chatId !== chatId));
+  clearSeenForUser(chatId);
 }
 
 export function isApproved(chatId: string): boolean {

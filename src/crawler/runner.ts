@@ -1,7 +1,7 @@
 import { loadConfig } from "../config.js";
 import { scoreJob } from "../scorer.js";
-import { isNewJob, markJobSeen } from "../deduplicator.js";
-import { broadcastMessage, formatJobMessage } from "../bale/client.js";
+import { isNewJobForUser, markJobSeenForUser } from "../deduplicator.js";
+import { sendMessage, formatJobMessage } from "../bale/client.js";
 import { getRegisteredChatIds } from "../bale/users.js";
 import { beginCrawl, endCrawl, abortCrawl, isCrawlRunning } from "./cancellation.js";
 import { JobinjaAdapter } from "./adapters/jobinja.js";
@@ -60,7 +60,6 @@ export async function runAdapter(site: SiteConfig, signal: AbortSignal): Promise
 
   for (const job of jobs) {
     if (signal.aborted) break;
-    if (!isNewJob(job.id)) continue;
 
     const { score, matchedTerms } = scoreJob(job, keywords);
     if (score < keywords.minScoreToNotify) continue;
@@ -69,11 +68,15 @@ export async function runAdapter(site: SiteConfig, signal: AbortSignal): Promise
     job.matchedTerms = matchedTerms;
 
     const message = formatJobMessage(job);
-    await broadcastMessage(message, chatIds);
-    markJobSeen(job.id);
-    sentCount++;
 
-    await new Promise((r) => setTimeout(r, 500));
+    for (const chatId of chatIds) {
+      if (signal.aborted) break;
+      if (!isNewJobForUser(job.id, chatId)) continue;
+      await sendMessage(chatId, message);
+      markJobSeenForUser(job.id, chatId);
+      sentCount++;
+      await new Promise((r) => setTimeout(r, 300));
+    }
   }
 
   console.log(`[runner] ${site.name}: sent ${sentCount} new job(s)`);
