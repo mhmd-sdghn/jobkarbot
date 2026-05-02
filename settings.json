@@ -1,0 +1,189 @@
+{
+  "bale": {
+    "botToken": "630549148:HCBu2Nq3qRTbNrd6FdirXR-bJTM9Qa605oM",
+    "chatIds": ["1447359698"],
+    "apiBaseUrl": "https://tapi.bale.ai"
+  },
+  "keywords": {
+    "searchQueries": [
+      "django",
+      "جنگو",
+      "python developer",
+      "برنامه نویس پایتون",
+      "توسعه دهنده پایتون",
+      "بک اند پایتون",
+      "backend python"
+    ],
+    "requiredMatch": [
+      ["django", "جنگو"]
+    ],
+    "scoring": {
+      "remote": {
+        "score": 10,
+        "terms": [
+          "remote", "دورکاری", "دور کاری", "ریموت",
+          "remote work", "work from home", "تله‌ورک", "تله ورک",
+          "دوركاري", "امکان دورکاری", "بصورت دورکاری", "به صورت دورکاری"
+        ]
+      },
+      "mashhad": {
+        "score": 8,
+        "terms": ["mashhad", "مشهد"]
+      },
+      "unspecified": {
+        "score": 5,
+        "description": "No location info found — job still considered"
+      },
+      "otherCity": {
+        "score": 2,
+        "terms": [
+          "تهران", "tehran",
+          "اصفهان", "isfahan",
+          "شیراز", "shiraz",
+          "کرج", "karaj",
+          "تبریز", "tabriz",
+          "اهواز", "ahvaz",
+          "قم", "qom",
+          "رشت", "rasht",
+          "کرمانشاه", "kermanshah",
+          "ارومیه", "urmia",
+          "زاهدان", "zahedan",
+          "همدان", "hamedan",
+          "یزد", "yazd",
+          "بندرعباس", "bandar abbas",
+          "اردبیل", "ardabil",
+          "سمنان", "semnan"
+        ]
+      },
+      "bonusTerms": [
+        { "terms": ["python", "پایتون", "پایتن"],                                     "bonus": 1   },
+        { "terms": ["fastapi", "fast api", "فست اپی", "فست‌اپی"],                    "bonus": 1   },
+        { "terms": ["drf", "django rest framework", "django rest", "rest api"],        "bonus": 1   },
+        { "terms": ["senior", "ارشد", "سینیور", "سنیور", "برنامه نویس ارشد"],        "bonus": 1   },
+        { "terms": ["celery", "سلری"],                                                 "bonus": 0.5 },
+        { "terms": ["redis", "ردیس"],                                                  "bonus": 0.5 },
+        { "terms": ["postgresql", "postgres", "پستگرس"],                              "bonus": 0.5 },
+        { "terms": ["docker", "داکر", "kubernetes", "k8s", "کوبرنتیز"],              "bonus": 0.5 },
+        { "terms": ["microservice", "microservices", "میکروسرویس", "micro service"],  "bonus": 0.5 },
+        { "terms": ["graphql", "گراف کیو ال"],                                        "bonus": 0.5 },
+        { "terms": ["aws", "azure", "gcp", "cloud", "ابر"],                           "bonus": 0.5 },
+        { "terms": ["elasticsearch", "الستیک سرچ", "elastic"],                        "bonus": 0.5 },
+        { "terms": ["linux", "لینوکس", "ubuntu", "اوبونتو"],                         "bonus": 0.5 },
+        { "terms": ["git", "github", "gitlab", "گیت"],                                "bonus": 0.5 },
+        { "terms": ["pytest", "unit test", "تست نویسی", "تست واحد"],                 "bonus": 0.5 },
+        { "terms": ["agile", "scrum", "اسکرام", "اجایل", "چابک"],                   "bonus": 0.5 },
+        { "terms": ["nginx", "gunicorn", "uwsgi"],                                     "bonus": 0.5 },
+        { "terms": ["full stack", "fullstack", "فول استک", "فول‌استک"],              "bonus": 0.5 },
+        { "terms": ["backend", "back-end", "بک اند", "بک‌اند"],                      "bonus": 0.5 },
+        { "terms": ["api", "web service", "وب سرویس", "وب‌سرویس"],                   "bonus": 0.5 }
+      ]
+    },
+    "minScoreToNotify": 4
+  },
+  "sites": [
+    {
+      "name": "jobinja",
+      "baseUrl": "https://jobinja.ir",
+      "searchUrl": "https://jobinja.ir/jobs?&filters%5Bjob_categories%5D%5B%5D=&filters%5Bkeywords%5D%5B0%5D={keyword}&filters%5Blocations%5D%5B%5D=&sort_by=created_at",
+      "loginUrl": "https://jobinja.ir/login/user",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": true
+    },
+    {
+      "name": "irantalent",
+      "baseUrl": "https://irantalent.com",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    },
+    {
+      "name": "jobvision",
+      "baseUrl": "https://jobvision.ir",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    },
+    {
+      "name": "karname",
+      "baseUrl": "https://karname.com",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    },
+    {
+      "name": "quera",
+      "baseUrl": "https://quera.org",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    },
+    {
+      "name": "karbord",
+      "baseUrl": "https://karbord.ir",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    },
+    {
+      "name": "ponisha",
+      "baseUrl": "https://ponisha.ir",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    },
+    {
+      "name": "hirood",
+      "baseUrl": "https://hirood.com",
+      "searchUrl": "",
+      "loginUrl": "",
+      "credentials": {
+        "username": "",
+        "password": ""
+      },
+      "crawlIntervalMinutes": 30,
+      "maxDaysOld": 7,
+      "enabled": false
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+services:
+  jobkar:
+    build: .
+    container_name: jobkar
+    restart: unless-stopped
+    ports:
+      - "3658:3658"
+    environment:
+      - PORT=3658
+      - NODE_ENV=production
+    volumes:
+      - ./settings.json:/app/settings.json
+      - jobkar_data:/app/data
+
+volumes:
+  jobkar_data:
+    driver: local
