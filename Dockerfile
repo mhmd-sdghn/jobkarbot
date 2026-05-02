@@ -20,7 +20,8 @@ RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile --prod
 
-# Install Chromium and all required system dependencies
+# Install Chromium, system dependencies, and procps (needed by Crawlee memory monitor)
+RUN apt-get update && apt-get install -y procps && rm -rf /var/lib/apt/lists/*
 RUN npx playwright install --with-deps chromium
 
 COPY --from=builder /app/dist ./dist
