@@ -9,7 +9,6 @@ services:
       - PORT=3658
       - NODE_ENV=production
     volumes:
-      - ./settings.json:/app/settings.json
       - jobkar_data:/app/data
       - jobkar_storage:/app/storage
 
