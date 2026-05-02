@@ -1,5 +1,5 @@
 # Stage 1 — build TypeScript
-FROM node:20-slim AS builder
+FROM mirror2.chabokan.net/node:24-slim AS builder
 WORKDIR /app
 
 RUN npm install -g pnpm
@@ -12,7 +12,7 @@ COPY src ./src
 RUN pnpm run build
 
 # Stage 2 — production runtime with Playwright/Chromium
-FROM node:20-slim AS runner
+FROM mirror2.chabokan.net/node:24-slim AS runner
 WORKDIR /app
 
 RUN npm install -g pnpm
